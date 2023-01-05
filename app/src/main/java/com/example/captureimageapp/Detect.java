@@ -36,9 +36,10 @@ public class Detect extends AppCompatActivity {
     int SELECT_PICTURE = 200;
     ImageView IVPreviewImage;
    Button BCameraOpen;
+   Button detect;
    TextView result;
    int imageSize = 128;
-
+   Bitmap image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,17 @@ public class Detect extends AppCompatActivity {
         IVPreviewImage = findViewById(R.id.mPhotoImageView);
         BCameraOpen=findViewById(R.id.mCameraButton);
         result = findViewById(R.id.mResultTextView);
+        detect = findViewById(R.id. mDetectButton);
+
+        detect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                image = Bitmap.createScaledBitmap(image, 128,128,false);
+                classifyImage(image);
+            }
+        });
+
         BSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +133,7 @@ public class Detect extends AppCompatActivity {
                 }
             }
             String[] classes={"berry_blotch","berry_disease","die_back","Healthy","Unknown"};
+
             result.setText( classes[maxpos]);
 
             // Releases model resources if no longer used.
@@ -144,29 +157,31 @@ public class Detect extends AppCompatActivity {
 //                    captureImage = Bitmap.createScaledBitmap(captureImage, 128,128,false);
 //                    classifyImage(captureImage);
                 Uri dat= data.getData();
-                Bitmap image= null;
+                 image= null;
                 try {
                     image= MediaStore.Images.Media.getBitmap(this.getContentResolver(), dat);
                 }catch (IOException e){
                     e.printStackTrace();
                 }
                 IVPreviewImage.setImageBitmap(image);
-               image = Bitmap.createScaledBitmap(image, 128,128,false);
-                classifyImage(image);
+               //image = Bitmap.createScaledBitmap(image, 128,128,false);
+                //classifyImage(image);
                 }
 
 
 
         else{
-            Bitmap captureImage= (Bitmap) data.getExtras().get("data");
-            int dimension = Math.min(captureImage.getWidth(), captureImage.getHeight());
-            captureImage= ThumbnailUtils.extractThumbnail(captureImage, dimension, dimension);
+             image= (Bitmap) data.getExtras().get("data");
+            int dimension = Math.min(image.getWidth(), image.getHeight());
+            image= ThumbnailUtils.extractThumbnail(image, dimension, dimension);
             //set capture image to imageview
-            IVPreviewImage.setImageBitmap(captureImage);
-            captureImage = Bitmap.createScaledBitmap(captureImage, 128,128,false);
-            classifyImage(captureImage);
+            IVPreviewImage.setImageBitmap(image);
+            //image = Bitmap.createScaledBitmap(image, 128,128,false);
+            //classifyImage(captureImage);
         }
-    }}}
+    }}
+
+}
 
 
 
