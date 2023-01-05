@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Login extends AppCompatActivity{
-    public static final String LOGIN_URL= "http://192.168.43.73/final.test/api/checklogin";
+    public static final String LOGIN_URL= "http://192.168.43.73:8000/api/checklogin";
     public static final String KEY_USERNAME= "username";
     public static final String KEY_PASSWORD= "password";
     private EditText usernameEditText;
@@ -57,7 +57,7 @@ public class Login extends AppCompatActivity{
                             @Override
                             public void onResponse(String response) {
                                 Log.d("res", response);
-                                if (response.trim().contains("successfully logged in")) {
+                                if (response.trim().equals("success")) {
                                     openProfile();
                                 } else {
                                     Toast.makeText(Login.this, response, Toast.LENGTH_LONG).show();
@@ -68,6 +68,7 @@ public class Login extends AppCompatActivity{
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Toast.makeText(Login.this, error.toString(), Toast.LENGTH_LONG).show();
+                                error.printStackTrace();
                             }
                         }) {
                     @Override
@@ -75,6 +76,7 @@ public class Login extends AppCompatActivity{
                         Map<String, String> map = new HashMap<>();
                         map.put(KEY_USERNAME, username);
                         map.put(KEY_PASSWORD, password);
+
                         return map;
                     }
                 };

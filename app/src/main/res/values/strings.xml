@@ -16,4 +16,10 @@
     <string name="login_form_username">Username</string>
     <string name="login_form_password">Password</string>
     <string name="login_form_login">LOGIN</string>
+
+    <string name="buttonSelectPhoto">Select Photo</string>
+    <string name="buttonTakePhoto">Start Camera</string>
+    <string name="buttonDiagnose">Detect</string>
+    <string name="defaultImage">Default image set now...</string>
+    <string name="descriptionImage">View for displaying image</string>
 </resources>
