@@ -132,7 +132,7 @@ public class Detect extends AppCompatActivity {
                     maxpos= i;
                 }
             }
-            String[] classes={"berry_blotch","berry_disease","die_back","Healthy","Unknown"};
+            String[] classes={"ikawa yawe irwaye indwara ya: berry_blotch","ikawa yawe irwaye indwara ya : berry_disease","ikawa yawe irwaye indwara ya: die_back","ikawa yawe ni: Healthy","Unknown"};
 
             result.setText( classes[maxpos]);
 
